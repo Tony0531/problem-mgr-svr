@@ -1,32 +1,27 @@
-var config = require('./config.ts')
-import express from 'express'
-import session from 'express-session'
-import mongoose from 'mongoose'
-import router from './router'
+import * as config from './config';
+import Koa from 'koa';
+import Router from 'koa-router';
+import * as site from 'controllers/site';
 
-var connection_string = config.dbprefix + config.dbhost + '/' + config.dbname;
+export const app = new Koa();
 
-// 数据库连接
-mongoose.connect(connection_string, function(err: any) {
-    if (err) {
-        console.log('connect to %s error', connection_string, err.message);
-    }
-});
+var router = new Router();
+router.post('/signup', site.signup);	// 用户注册
+router.post('/signin', site.signin);	// 用户登录
 
-const app = express()
+// app.use(
+//     // session({
+//     //     secret: config.session_secret,
+//     //     // store: new MongoStore({
+//     //     //     url: connection_string
+//     //     // }),
+//     //     resave: true,
+//     //     saveUninitialized: true,
+//     // })
+// )
 
-var MongoStore = require('connect-mongo')(session)
-app.use(
-    session({
-        secret: config.session_secret,
-        store: new MongoStore({
-            url: connection_string
-        }),
-        resave: true,
-        saveUninitialized: true,
-    })
-)
+app.use(router.routes);
 
-app.use('/', router);
+const server = app.listen(config.port, () => console.log('Example app listening on port 3000!'))
 
-app.listen(config.port, () => console.log('Example app listening on port 3000!'))
+export default server;
