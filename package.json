@@ -8,7 +8,7 @@
     "dev": "tsnd --respawn --transpileOnly ./src/app.ts",
     "watch": "mocha-typescript-watch",
     "pretest": "tsc",
-    "test": "mocha"
+    "test": "mocha test/*.ts"
   },
   "author": "Tony",
   "license": "ISC",
@@ -29,5 +29,10 @@
     "source-map-support": "^0.5.16",
     "supertest": "^4.0.2",
     "tslint": "^6.0.0"
+  },
+  "mocha": {
+    "require": [
+      "source-map-support/register"
+    ]
   }
 }
