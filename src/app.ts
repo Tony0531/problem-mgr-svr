@@ -1,7 +1,6 @@
-import * as config from './config';
 import Koa from 'koa';
 import Router from 'koa-router';
-import * as site from 'controllers/site';
+import * as site from './controllers/site';
 
 export const app = new Koa();
 
@@ -21,7 +20,3 @@ router.post('/signin', site.signin);	// 用户登录
 // )
 
 app.use(router.routes);
-
-const server = app.listen(config.port, () => console.log('Example app listening on port 3000!'))
-
-export default server;
