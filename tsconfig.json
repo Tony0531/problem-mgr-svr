@@ -6,7 +6,6 @@
     "declaration": true,
     "sourceMap": true,
     "outDir": "./build",
-    "rootDir": "./src",
     "strict": true,
     "baseUrl": ".",
     "paths": {
@@ -18,6 +17,7 @@
     "esModuleInterop": true
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "test/**/*",
   ],
 }

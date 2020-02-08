@@ -4,11 +4,12 @@
   "description": "",
   "main": "build/start.js",
   "scripts": {
-    "prod": "tsc && node build/start.js",
+    "preprod": "tsc",
+    "prod": "node build/src/start.js",
     "dev": "tsnd --respawn --transpileOnly ./src/start.ts",
     "watch": "mocha-typescript-watch",
     "pretest": "tsc",
-    "test": "mocha test/*.ts"
+    "test": "mocha build/test/*.js"
   },
   "author": "Tony",
   "license": "ISC",
@@ -26,7 +27,7 @@
     "mocha": "^7.0.1",
     "mocha-typescript": "^1.1.17",
     "nyc": "^15.0.0",
-    "source-map<-support": "^0.5.16",
+    "source-map-support": "^0.5.16",
     "supertest": "^4.0.2",
     "tslint": "^6.0.0"
   },
