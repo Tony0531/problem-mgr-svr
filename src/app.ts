@@ -5,8 +5,8 @@ import * as site from './controllers/site';
 const app = new Koa();
 
 var router = new Router();
-router.post('/signup', site.signup);	// 用户注册
-router.post('/signin', site.signin);	// 用户登录
+router.post('/signup', site.signup);  // 用户注册
+router.post('/signin', site.signin);  // 用户登录
 
 // app.use(
 //     // session({
@@ -19,6 +19,6 @@ router.post('/signin', site.signin);	// 用户登录
 //     // })
 // )
 
-app.use(router.routes);
+app.use(router.routes());
 
 export default app;

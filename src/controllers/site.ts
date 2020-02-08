@@ -1,7 +1,8 @@
+import { Context } from 'koa'
 /*
  * 用户注册逻辑
  */
-export function signup(ctx: any) {
+export async function signup(ctx: any, next: any) {
     // var loginname = req.body.loginname;
     // var password = req.body.password;
     // var ep = new eventproxy();
@@ -37,10 +38,9 @@ export function signup(ctx: any) {
     // });
 }
 
-export function signin(ctx: any) {
-    console.log("xxxxx signin");
-    var loginname = ctx.body.loginname;
-    var password = ctx.body.password;
+export async function signin(ctx: Context) {
+    // var loginname = ctx.body.loginname;
+    // var password = ctx.body.password;
     // var ep = new eventproxy();
     // ep.fail(next);
 
