@@ -1,8 +1,22 @@
 import app from '../src/app';
-const request = require('supertest')(app.listen());
+import supertest, { Response } from 'supertest';
+import mock from 'mock-fs';
+import chai from 'chai';
+
+const request = supertest(app.listen());
+const should = chai.should();
 
 describe("site/test", () => {
-    describe('sign up', function() {
+    beforeEach(function() {
+        mock({
+            './users/user1': '{"password":"passwd1"}',
+        });
+    });
+    afterEach(function() {
+        mock.restore();
+    });
+
+    describe('sign in', function() {
         it('should sign in successful', function(done) {
             request
                 .post('/signin')
@@ -10,9 +24,11 @@ describe("site/test", () => {
                     loginname: "user1",
                     password: "passwd1"
                 })
-                .end(function(err: any, res: any) {
-                    //should.not.exist(err);
-                    res.text.should.containEql('登录成功');
+                .expect(200)
+                .end(function(err: any, res: Response) {
+                    should.not.exist(err);
+                    should.exist(res);
+                    res.text.should.contains('登录成功');
                     done();
                 });
         });

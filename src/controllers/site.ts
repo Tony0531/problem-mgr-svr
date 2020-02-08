@@ -38,6 +38,7 @@ export function signup(ctx: any) {
 }
 
 export function signin(ctx: any) {
+    console.log("xxxxx signin");
     var loginname = ctx.body.loginname;
     var password = ctx.body.password;
     // var ep = new eventproxy();
