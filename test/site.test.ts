@@ -3,21 +3,24 @@ import supertest, { Response } from 'supertest';
 import mock from 'mock-fs';
 import chai from 'chai';
 
-const request = supertest(app.listen());
 const should = chai.should();
 
-describe("site/test", () => {
+describe("site/test", function() {
+    const server = app.listen();
+    const request = supertest(server);
+
     beforeEach(function() {
         mock({
             './users/user1': '{"password":"passwd1"}',
         });
     });
+
     afterEach(function() {
         mock.restore();
     });
 
     describe('sign in', function() {
-        it('should sign in successful', function(done) {
+        it('should sign in successful', (done) => {
             request
                 .post('/signin')
                 .send({

@@ -1,8 +1,10 @@
-import { Context } from 'koa'
+import { Context } from 'koa';
+import { UserMgr } from '../models';
+
 /*
  * 用户注册逻辑
  */
-export async function signup(ctx: any, next: any) {
+export async function signup(ctx: Context) {
     // var loginname = req.body.loginname;
     // var password = req.body.password;
     // var ep = new eventproxy();
@@ -39,8 +41,13 @@ export async function signup(ctx: any, next: any) {
 }
 
 export async function signin(ctx: Context) {
-    // var loginname = ctx.body.loginname;
-    // var password = ctx.body.password;
+    const userMgr: UserMgr = ctx.userMgr;
+
+    const loginname = ctx.request.body.loginname;
+    const password = ctx.request.body.password;
+
+
+    //States.isFile()
     // var ep = new eventproxy();
     // ep.fail(next);
 

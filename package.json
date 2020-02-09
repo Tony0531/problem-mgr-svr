@@ -5,7 +5,7 @@
   "main": "build/start.js",
   "scripts": {
     "preprod": "tsc",
-    "prod": "node build/src/start.js",
+    "prod": "node build/start.js",
     "dev": "tsnd --respawn --transpileOnly ./src/start.ts",
     "watch": "mocha-typescript-watch",
     "test": "ts-mocha test/*.ts"
@@ -14,11 +14,13 @@
   "license": "ISC",
   "dependencies": {
     "koa": "^2.11.0",
+    "koa-bodyparser": "^4.2.1",
     "koa-router": "^8.0.6"
   },
   "devDependencies": {
     "@types/chai": "^4.2.8",
     "@types/koa": "^2.11.0",
+    "@types/koa-bodyparser": "^4.3.0",
     "@types/koa-router": "^7.4.0",
     "@types/mocha": "^7.0.1",
     "@types/mock-fs": "^4.10.0",
@@ -30,7 +32,6 @@
     "nyc": "^15.0.0",
     "source-map-support": "^0.5.16",
     "supertest": "^4.0.2",
-    "ts-mocha": "^6.0.0",
-    "tslint": "^6.0.0"
+    "ts-mocha": "^6.0.0"
   }
 }

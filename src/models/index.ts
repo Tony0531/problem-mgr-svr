@@ -5,6 +5,7 @@ export { QuestionRepo, Exam, Question }
 
 import { User } from './user'
 import { UserExam } from './user_exam'
-export { User, UserExam }
+import { UserMgr } from './user_mgr'
+export { User, UserExam, UserMgr }
 
 
