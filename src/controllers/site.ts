@@ -46,6 +46,10 @@ export async function signin(ctx: Context) {
     const loginname = ctx.request.body.loginname;
     const password = ctx.request.body.password;
 
+    const user = userMgr.findUser(loginname);
+    if (!user) {
+
+    }
 
     //States.isFile()
     // var ep = new eventproxy();
