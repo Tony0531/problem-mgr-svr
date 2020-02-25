@@ -1,7 +1,11 @@
 export class Exam {
-    constructor(
-        readonly title: string,
-        readonly subject: string) {
-    }
+  title: string | undefined
+  subject: string | undefined
+  latexClass: string | undefined
+  latexHeaders: string[]
+
+  constructor() {
+    this.latexHeaders = []
+  }
 }
 

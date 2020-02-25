@@ -8,7 +8,7 @@
     "prod": "node build/start.js",
     "dev": "tsnd --respawn --transpileOnly ./src/start.ts",
     "watch": "mocha-typescript-watch",
-    "test": "ts-mocha test/*.ts"
+    "test": "ts-mocha test/*.ts test/**/*.ts"
   },
   "author": "Tony",
   "license": "ISC",

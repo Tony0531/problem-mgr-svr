@@ -26,11 +26,10 @@ export class QuestionRepo {
   }
 
   async scan() {
-    console.log("scan")
     const readdir = promisify(fs.readdir)
 
-    const dirs = await readdir(this.repo)
-    for (const d of dirs) {
+    const dirs = await readdir(this.repo).catch(reason => { })
+    for (const d of dirs || []) {
       console.log(d)
     }
   }

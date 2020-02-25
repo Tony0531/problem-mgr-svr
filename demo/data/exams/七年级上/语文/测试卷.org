@@ -1,1 +1,22 @@
+#+TITLE: 语文测试试卷一
+#+STARTUP: overview
+#+STARTUP: noptag
+#+STARTUP: hideblocks
+#+TAGS: no_answer(a) \n no_pic(p)
+#+CATEGORY: 语文
+#+LATEX_CLASS: exam
+#+LATEX_HEADER: \usepackage{xeCJK}
+#+LATEX_HEADER: \usepackage{amsmath}
+#+LATEX_HEADER: \usepackage{amssymb}
+#+LATEX_HEADER: \usepackage{polynom}
+#+LATEX_HEADER: \usepackage{ulem}
+#+LATEX_HEADER: \usepackage{tikz}
+#+LATEX_HEADER: \usepackage{tkz-euclide}
+#+LATEX_HEADER: \newcommand\epart{\part}
+#+LATEX_HEADER: \newcommand\degree{^\circ}
+#+LATEX_HEADER: \renewcommand{\solutiontitle}{\noindent\textbf{解：}\par\noindent}
+#+LATEX_HEADER: \everymath{\displaystyle}
+#+LATEX_HEADER: \usetkzobj{all}
+
+#+LATEX_CLASS_OPTIONS: [answers]
 
