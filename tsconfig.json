@@ -15,7 +15,8 @@
           "src/*",
       ]
     },
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "strictNullChecks": true
   },
   "include": [
     "src/**/*",

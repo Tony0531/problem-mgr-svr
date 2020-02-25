@@ -1,22 +1,37 @@
+import fs from 'fs'
+import { promisify } from 'util'
 import { Exam } from './exam'
 import { Question } from './question'
 
 export class QuestionRepo {
-    private _subjects: string[] = [];
-    get subjects() {
-        return this._subjects
-    }
+  readonly repo: string
 
-    private _exams = new Map<string, Exam>();
-    get exams(): Exam[] {
-        return [...this._exams.values()];
-    }
+  private _subjects: string[] = []
+  get subjects() {
+    return this._subjects
+  }
 
-    private _questions = new Map<string, Question>();
-    get questions(): Question[] {
-        return [...this._questions.values()];
-    }
+  private _exams = new Map<string, Exam>()
+  get exams(): Exam[] {
+    return [...this._exams.values()]
+  }
 
-    constructor() {
+  private _questions = new Map<string, Question>()
+  get questions(): Question[] {
+    return [...this._questions.values()]
+  }
+
+  constructor(root: string | undefined) {
+    this.repo = root ? `${root}/exams` : "exams"
+  }
+
+  async scan() {
+    console.log("scan")
+    const readdir = promisify(fs.readdir)
+
+    const dirs = await readdir(this.repo)
+    for (const d of dirs) {
+      console.log(d)
     }
-};
+  }
+}

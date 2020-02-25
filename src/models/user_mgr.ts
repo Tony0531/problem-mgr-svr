@@ -1,21 +1,29 @@
-import path from 'path';
-import * as fs from 'fs';
-import { promisify } from 'util';
-import { User } from './user';
+import path from 'path'
+import * as fs from 'fs'
+import { promisify } from 'util'
+import { User } from './user'
 
-const fileExists = promisify(fs.exists);
+const fileExists = promisify(fs.exists)
 
 export class UserMgr {
-    constructor(readonly repo: string) {
+  readonly repo: string
+
+  constructor(root: string | undefined) {
+    this.repo = root ? `${root}/users` : "users"
+  }
+
+  async findUser(username: string): Promise<User | undefined> {
+    const userFile = path.join(this.repo, username + ".json")
+
+    const userFileExists = await fileExists(userFile)
+    if (!userFileExists) {
+      return undefined
     }
 
-    async findUser(username: string): User | undefined {
-        const file = path.join(this.repo, username);
+    const userDataBuffer = await fs.promises.readFile(userFile)
 
-        if (!fileExists(file)) {
-            return undefined;
-        }
+    const userData = JSON.parse(userDataBuffer.toString())
 
-        return undefined;
-    }
-};
+    return User.fromData(username, userData)
+  }
+}
