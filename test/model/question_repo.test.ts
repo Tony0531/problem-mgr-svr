@@ -8,13 +8,35 @@ describe("model/question_repo", function() {
   let repo: QuestionRepo
 
   this.beforeAll(function() {
+    mock({
+      'exams': {
+        'grandle1': {
+          'category1': {
+            'test1.org':
+              `
+`,
+            'test2.org': '',
+          },
+          'category2': {
+            'test3.org': '',
+          },
+        },
+        'grandle2': {
+          'category1': {
+            'test4.org': '',
+          },
+        }
+      },
+    })
+
     repo = new QuestionRepo(undefined);
     (async function() {
       await repo.scan()
     })()
   })
 
-  it("exam should exist", function(done) {
+  it("exams should exist", function(done) {
+    repo.exams.map(exam => exam.title || '-').should.deep.equals(['test1', 'test2', 'test3', 'test4'])
     done()
   })
 })

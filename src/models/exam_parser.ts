@@ -4,6 +4,12 @@ export class ExamParser {
   constructor(readonly exam: Exam) {
   }
 
+  append(trunk: string) {
+  }
+
+  complete() {
+  }
+
   parse(content: string) {
     const lines = content.split(/\r?\n/)
 
