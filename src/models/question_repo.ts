@@ -9,24 +9,28 @@ const readdir = promisify(fs.readdir)
 
 export class QuestionRepo {
   readonly repo: string
-
+  private _exams = new Map<string, Exam>()
   private _subjects: string[] = []
+  private _questions = new Map<string, Question>()
+
+  constructor(root: string | undefined) {
+    this.repo = root ? `${root}/exams` : "exams"
+  }
+
   get subjects() {
     return this._subjects
   }
 
-  private _exams = new Map<string, Exam>()
   get exams(): Exam[] {
     return [...this._exams.values()]
   }
 
-  private _questions = new Map<string, Question>()
-  get questions(): Question[] {
-    return [...this._questions.values()]
+  findExam(title: string): Exam | undefined {
+    return this._exams.get(title)
   }
 
-  constructor(root: string | undefined) {
-    this.repo = root ? `${root}/exams` : "exams"
+  get questions(): Question[] {
+    return [...this._questions.values()]
   }
 
   addExam(exam: Exam) {
@@ -45,6 +49,7 @@ export class QuestionRepo {
 
   async scan() {
     let examPromises: Promise<Exam | undefined>[] = []
+
 
     const grade_dirs = await readdir(this.repo)
       .catch(reason => {
@@ -103,6 +108,6 @@ export class QuestionRepo {
         console.log(error)
         reject(error)
       })
-    });
+    })
   }
 }
