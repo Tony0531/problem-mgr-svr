@@ -12,8 +12,10 @@ export class UserMgr {
     this.repo = root ? `${root}/users` : "users"
   }
 
-  async findUser(username: string): Promise<User | undefined> {
-    const userFile = path.join(this.repo, username + ".json")
+  async findUser(studentId: string): Promise<User | undefined> {
+    const userFile = path.join(this.repo, studentId + ".json")
+
+    console.log(`xxxxx ${userFile}`);
 
     const userFileExists = await fileExists(userFile)
     if (!userFileExists) {
@@ -24,6 +26,6 @@ export class UserMgr {
 
     const userData = JSON.parse(userDataBuffer.toString())
 
-    return User.fromData(username, userData)
+    return User.fromData(studentId, userData)
   }
 }

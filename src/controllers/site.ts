@@ -43,17 +43,26 @@ export async function signup(ctx: Context) {
 export async function signin(ctx: Context) {
   const userMgr: UserMgr = ctx.userMgr
 
-  const loginname = ctx.request.body.loginname
-  const password = ctx.request.body.password
+  const studentId = ctx.request.body.studentId
+  if (!studentId) {
+    throw ServerError.argumentError("studentId not configured")
+  }
 
-  const user = await userMgr.findUser(loginname)
+  const passwd = ctx.request.body.passwd
+  if (!passwd) {
+    throw ServerError.argumentError("passwd not configured")
+  }
+
+  const user = await userMgr.findUser(studentId)
   if (!user) {
     throw new ServerError(ServerErrorCode.UserNotExists)
   }
 
-  if (!user?.validatePasswd(password)) {
+  if (!user?.validatePasswd(passwd)) {
     throw new ServerError(ServerErrorCode.UserAuthFailed)
   }
 
-  ctx.response.body = {}
+  ctx.response.body = {
+    "name": user.name
+  }
 }

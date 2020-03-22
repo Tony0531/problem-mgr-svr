@@ -21,9 +21,9 @@ export class Service extends Koa {
     this.use(koaCors())
     this.use(bodyParser())
     this.use(this.processError())
-    this.on("error", (err, ctx) => {
+    this.on("error", (err, _) => {
       if (logger) {
-        logger.log(err, ctx)
+        logger.log(err)
       }
     })
 
