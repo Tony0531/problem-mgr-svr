@@ -1,7 +1,9 @@
-import Koa, { Context } from 'koa'
+import Koa from 'koa'
 import Router from 'koa-router'
+import koaCors from 'koa-cors';
 import bodyParser from 'koa-bodyparser'
 import * as site from './controllers/site'
+import * as repo from './controllers/repo'
 import { ServerError, ServerErrorCode } from './controllers/error'
 import { UserMgr } from './models'
 import { QuestionRepo } from './models'
@@ -15,8 +17,8 @@ export class Service extends Koa {
     super()
     this.context.userMgr = new UserMgr(root)
     this.context.questionRepo = new QuestionRepo(root)
-    this.context.questionRepo.scan()
 
+    this.use(koaCors())
     this.use(bodyParser())
     this.use(this.processError())
     this.on("error", (err, ctx) => {
@@ -28,8 +30,13 @@ export class Service extends Koa {
     const router = new Router()
     router.post('/signup', site.signup)  // 用户注册
     router.post('/signin', site.signin)  // 用户登录
+    router.get('/exams', repo.exams)  // 用户登录
 
     this.use(router.routes())
+  }
+
+  async startup() {
+    await this.context.questionRepo.scan()
   }
 
   processError(): ((ctx: any, next: any) => void) {

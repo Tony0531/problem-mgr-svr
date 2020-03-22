@@ -50,7 +50,6 @@ export class QuestionRepo {
   async scan() {
     let examPromises: Promise<Exam | undefined>[] = []
 
-
     const grade_dirs = await readdir(this.repo)
       .catch(reason => {
         if (reason.code != 'ENOENT') {

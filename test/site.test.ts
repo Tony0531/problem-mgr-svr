@@ -10,6 +10,10 @@ describe("site/test", function() {
   const server = app.listen()
   const request = supertest(server)
 
+  this.beforeAll(async function() {
+    await app.startup()
+  })
+
   beforeEach(function() {
     mock({
       'users/user1.json': '{"passwd":"passwd1"}',
