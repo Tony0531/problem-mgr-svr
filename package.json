@@ -29,7 +29,7 @@
     "@types/node": "^13.7.0",
     "@types/supertest": "^2.0.8",
     "chai": "^4.2.0",
-    "mocha": "^7.0.1",
+    "mocha": "^10.2.0",
     "mocha-typescript": "^1.1.17",
     "mock-fs": "^4.10.4",
     "nyc": "^15.0.0",
